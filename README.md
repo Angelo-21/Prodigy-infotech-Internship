@@ -1,34 +1,4 @@
-# Caesar Cipher Tool
-
-A Python implementation of the Caesar Cipher encryption/decryption algorithm with interactive command-line interface.
-
-## Features
-
-- Encrypt and decrypt text messages
-- Input validation and error handling
-- Message verification option
-- Support for shift values 1-25
-
-## Usage
-
-```bash
-python caesar_cipher.py
-```
-
-Select encryption or decryption mode, enter your message and shift value to process text.
-
-## How it Works
-
-The Caesar Cipher shifts each letter by a fixed number of positions in the alphabet. Non-alphabetic characters remain unchanged.
-
-## Example
-
-```
-Enter message to encrypt: Hello World
-Enter shift value: 3
-Encrypted message: KHOOR ZRUOG
-```
-
-## Requirements
-
-- Python 3.x
+This is one of my internship task at Prodigy InfoTech.
+This code is a basic keylogger program written in python using pynput library which asks user for a specified time till the keystrokes are captured. Then the log is saved to a `keylogger_log.txt` file which can be viewed later.
+`pynput` library must be installed prior to running this code.
+**Running this code might require superuser/administrator privileges. I tested this code on my Kali Linux terminal in my virtual machine where I had to be a superuser.**
