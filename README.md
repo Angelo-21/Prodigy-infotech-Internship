@@ -7,7 +7,6 @@ A Python implementation of the Caesar Cipher encryption/decryption algorithm wit
 - Encrypt and decrypt text messages
 - Input validation and error handling
 - Message verification option
-- Professional output formatting
 - Support for shift values 1-25
 
 ## Usage
