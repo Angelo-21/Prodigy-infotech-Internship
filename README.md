@@ -1,34 +1,55 @@
-# Caesar Cipher Tool
+# Password Complexity Checker
 
-A Python implementation of the Caesar Cipher encryption/decryption algorithm with interactive command-line interface.
+A simple Python tool that assesses password strength and provides security recommendations.
 
 ## Features
 
-- Encrypt and decrypt text messages
-- Input validation and error handling
-- Message verification option
-- Support for shift values 1-25
-
-## Usage
-
-```bash
-python caesar_cipher.py
-```
-
-Select encryption or decryption mode, enter your message and shift value to process text.
-
-## How it Works
-
-The Caesar Cipher shifts each letter by a fixed number of positions in the alphabet. Non-alphabetic characters remain unchanged.
-
-## Example
-
-```
-Enter message to encrypt: Hello World
-Enter shift value: 3
-Encrypted message: KHOOR ZRUOG
-```
+- Secure password input (hidden while typing)
+- Strength assessment based on 5 criteria
+- Specific improvement recommendations
+- Password security tips
+- Interactive command-line interface
 
 ## Requirements
 
 - Python 3.x
+
+## Usage
+
+```bash
+python password_checker.py
+```
+
+Select from menu options:
+- Check password strength
+- View password tips
+- Exit
+
+## Password Criteria
+
+The tool evaluates passwords based on:
+- Length (minimum 8 characters)
+- Uppercase letters (A-Z)
+- Lowercase letters (a-z) 
+- Numbers (0-9)
+- Special characters (!@#$%^&*)
+
+## Strength Levels
+
+- **Very Strong** - All 5 criteria met
+- **Strong** - 4 criteria met
+- **Moderate** - 3 criteria met
+- **Weak** - 2 criteria met
+- **Very Weak** - 1 or fewer criteria met
+
+## Example
+
+```
+Enter your password: [hidden input]
+Entered Password: P#######d
+Password Strength: Strong (4 out of 5 criteria met)
+Password Length: 9 characters
+
+Recommendations:
+• Add special characters (!@#$%^&*)
+```
