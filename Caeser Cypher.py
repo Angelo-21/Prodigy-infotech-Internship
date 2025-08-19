@@ -1,134 +1,128 @@
-def caesar_cipher(text, shift, mode='encrypt'):
-    """
-    Encrypts or decrypts text using the Caesar Cipher algorithm.
+# Caesar Cipher Program for Beginners
+
+def encrypt_text(message, shift):
+    """Encrypts a message using Caesar Cipher"""
+    encrypted = ""
     
-    Args:
-        text (str): The input text to encrypt or decrypt
-        shift (int): The number of positions to shift each letter
-        mode (str): 'encrypt' or 'decrypt'
-    
-    Returns:
-        str: The encrypted or decrypted text
-    """
-    if mode == 'decrypt':
-        shift = -shift
-    
-    result = ""
-    
-    for char in text:
-        if char.isalpha():
-            # Determine if the character is uppercase or lowercase
-            is_upper = char.isupper()
-            char = char.lower()
+    for letter in message:
+        if letter.isalpha():  # Check if it's a letter
+            # Convert to uppercase for simplicity
+            letter = letter.upper()
             
-            # Convert to number (a=0, b=1, ..., z=25)
-            char_num = ord(char) - ord('a')
+            # Get the position of letter (A=0, B=1, etc.)
+            position = ord(letter) - ord('A')
             
-            # Apply the shift with wrapping
-            shifted_num = (char_num + shift) % 26
+            # Shift the position
+            new_position = (position + shift) % 26
             
-            # Convert back to character
-            shifted_char = chr(shifted_num + ord('a'))
-            
-            # Restore original case
-            if is_upper:
-                shifted_char = shifted_char.upper()
-            
-            result += shifted_char
+            # Convert back to letter
+            new_letter = chr(new_position + ord('A'))
+            encrypted = encrypted + new_letter
         else:
-            # Keep non-alphabetic characters unchanged
-            result += char
+            # Keep spaces and punctuation as they are
+            encrypted = encrypted + letter
     
-    return result
+    return encrypted
 
 
-def get_user_input():
-    """
-    Gets user input for the Caesar Cipher operation.
+def decrypt_text(message, shift):
+    """Decrypts a message using Caesar Cipher"""
+    decrypted = ""
     
-    Returns:
-        tuple: (text, shift, mode)
-    """
-    print("=== Caesar Cipher Program ===")
-    print()
-    
-    # Get the text
-    text = input("Enter the text to encrypt/decrypt: ")
-    
-    # Get the shift value
-    while True:
-        try:
-            shift = int(input("Enter the shift value (1-25): "))
-            if 1 <= shift <= 25:
-                break
-            else:
-                print("Please enter a number between 1 and 25.")
-        except ValueError:
-            print("Please enter a valid number.")
-    
-    # Get the mode
-    while True:
-        mode = input("Choose mode (E for encrypt, D for decrypt): ").lower()
-        if mode in ['e', 'encrypt']:
-            mode = 'encrypt'
-            break
-        elif mode in ['d', 'decrypt']:
-            mode = 'decrypt'
-            break
+    for letter in message:
+        if letter.isalpha():  # Check if it's a letter
+            # Convert to uppercase for simplicity
+            letter = letter.upper()
+            
+            # Get the position of letter (A=0, B=1, etc.)
+            position = ord(letter) - ord('A')
+            
+            # Shift backwards
+            new_position = (position - shift) % 26
+            
+            # Convert back to letter
+            new_letter = chr(new_position + ord('A'))
+            decrypted = decrypted + new_letter
         else:
-            print("Please enter 'E' for encrypt or 'D' for decrypt.")
+            # Keep spaces and punctuation as they are
+            decrypted = decrypted + letter
     
-    return text, shift, mode
+    return decrypted
 
 
-def display_result(original_text, result_text, shift, mode):
-    """
-    Displays the result of the Caesar Cipher operation.
+# Main program
+print("Caesar Cipher Encryption/Decryption Tool")
+print("=" * 40)
+print("This program can encrypt and decrypt messages using Caesar Cipher.")
+print()
+
+while True:
+    # Get user's choice
+    print("Select an option:")
+    print("1. Encrypt a message")
+    print("2. Decrypt a message")
+    print("3. Exit program")
+    print("-" * 30)
     
-    Args:
-        original_text (str): The original input text
-        result_text (str): The encrypted or decrypted text
-        shift (int): The shift value used
-        mode (str): The mode used ('encrypt' or 'decrypt')
-    """
-    print("\n" + "="*50)
-    print(f"Operation: {mode.capitalize()}")
-    print(f"Shift value: {shift}")
-    print(f"Original text: {original_text}")
-    print(f"Result: {result_text}")
-    print("="*50)
-
-
-def main():
-    """
-    Main function to run the Caesar Cipher program.
-    """
-    while True:
-        try:
-            # Get user input
-            text, shift, mode = get_user_input()
-            
-            # Perform the encryption or decryption
-            result = caesar_cipher(text, shift, mode)
-            
-            # Display the result
-            display_result(text, result, shift, mode)
-            
-            # Ask if user wants to continue
-            print()
-            continue_choice = input("Do you want to perform another operation? (y/n): ").lower()
-            if continue_choice not in ['y', 'yes']:
-                print("Thank you for using the Caesar Cipher program!")
-                break
-            print()
-            
-        except KeyboardInterrupt:
-            print("\n\nProgram interrupted. Goodbye!")
-            break
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            print("Please try again.")
-
-
-if __name__ == "__main__":
-    main()
+    choice = input("Enter your choice (1, 2, or 3): ")
+    
+    if choice == '1':
+        # Encrypt
+        print("\nENCRYPTION MODE")
+        print("-" * 20)
+        message = input("Enter message to encrypt: ")
+        
+        # Get shift with validation
+        while True:
+            try:
+                shift = int(input("Enter shift value (1-25): "))
+                if 1 <= shift <= 25:
+                    break
+                else:
+                    print("Error: Please enter a number between 1 and 25.")
+            except ValueError:
+                print("Error: Please enter a valid number.")
+        
+        result = encrypt_text(message, shift)
+        print(f"\nOriginal message: {message}")
+        print(f"Encrypted message: {result}")
+        print(f"Shift value used: {shift}")
+        
+        # Ask if they want to verify by decrypting
+        verify = input("\nVerify by decrypting? (y/n): ").lower()
+        if verify == 'y' or verify == 'yes':
+            decrypted = decrypt_text(result, shift)
+            print(f"Verification - Decrypted: {decrypted}")
+        
+    elif choice == '2':
+        # Decrypt
+        print("\nDECRYPTION MODE")
+        print("-" * 20)
+        message = input("Enter encrypted message: ")
+        
+        # Get shift with validation
+        while True:
+            try:
+                shift = int(input("Enter shift value used for encryption: "))
+                if 1 <= shift <= 25:
+                    break
+                else:
+                    print("Error: Please enter a number between 1 and 25.")
+            except ValueError:
+                print("Error: Please enter a valid number.")
+        
+        result = decrypt_text(message, shift)
+        print(f"\nEncrypted message: {message}")
+        print(f"Decrypted message: {result}")
+        print(f"Shift value used: {shift}")
+        
+    elif choice == '3':
+        # Exit
+        print("\nThank you for using Caesar Cipher Tool.")
+        print("Program terminated.")
+        break
+        
+    else:
+        print("Invalid choice. Please enter 1, 2, or 3.")
+    
+    print("\n" + "=" * 50)
